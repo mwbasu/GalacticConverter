@@ -21,13 +21,16 @@ public class Parser {
     public Parser() {
         //mapp();
         mappReCaller();
+        statementCollectCaller();
+        statementToDeci();
+    }
+    void statementCollectCaller(){
         try {
             statementCollect();
         }catch (Exception e){
             System.out.println("Error in input statement! Try again.");
-            statementCollect();
+            statementCollectCaller();
         }
-        statementToDeci();
     }
     void mappReCaller(){
         try {
