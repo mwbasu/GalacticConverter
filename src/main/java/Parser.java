@@ -1,9 +1,5 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Scanner;
-import java.util.TreeMap;
 
 /**
  * Created by niladrib on 7/12/2017.
@@ -24,17 +20,33 @@ public class Parser {
     }
     public Parser() {
         //mapp();
-        mappRe();
-        statementCollect();
+        mappReCaller();
+        try {
+            statementCollect();
+        }catch (Exception e){
+            System.out.println("Error in input statement! Try again.");
+            statementCollect();
+        }
         statementToDeci();
     }
-    void mappRe(){
+    void mappReCaller(){
+        try {
+            mappRe();
+        }catch (Exception e){
+            System.out.println("Error in input statement! Try again.");
+            mappReCaller();
+        }
+    }
+    void mappRe() throws ArrayIndexOutOfBoundsException{
         while(cont4){
             System.out.println("Enter a relation:");
             String s2=s.nextLine();
             String[] arr = s2.split(" ");
-            if(map.containsKey(arr[2])){
+            if(map.containsKey(arr[2]) && arr[2].length()==1 && arr.length==3){
                 map.put(arr[2],arr[0]);
+            }else{
+                System.out.println("Input error! Try again.");
+                mappRe();
             }
             System.out.println("Add more? 1)Yes  2)No");
             if(new String(s.nextLine()).contains("2")){
@@ -43,31 +55,50 @@ public class Parser {
         }
     }
 
-    void statementToDeci(){
+    private void statementToDeci(){
         int romVal;
         while(cont3){
             System.out.println("Enter a statement to translate: ");
             String stmnt=s.nextLine();
             StringBuilder sb=new StringBuilder();
-            String[] arr = stmnt.split(" ");
+            StringBuilder outputStmnt=new StringBuilder();
+            String[] arrTemp = stmnt.split(" ");
+            ArrayList<String> arr=new ArrayList<String>();
+            if(stmnt.contains("much")){
+                for(int x=3; x<(arrTemp.length-1); x++){
+                    arr.add(arrTemp[x]);
+                }
+            }else if(stmnt.contains("many")){
+                for(int x=4; x<(arrTemp.length-1); x++){
+                    arr.add(arrTemp[x]);
+                }
+            }else {
+                for(int x=0; x<arrTemp.length; x++){
+                    arr.add(arrTemp[x]);
+                }
+            }
+            for(String s1:arr){
+                outputStmnt.append(s1+" ");
+            }
             int count=0, valueOfVar = 0;
             for(String ss: arr){
                 count+=1;
-
                 if(map.containsValue(ss)){
                     for(Entry<String, String> entry:map.entrySet()){
-
                         if(ss.equals(entry.getValue())){
                             sb.append(entry.getKey());
-                            if(count==arr.length){
+                            if(count==arr.size()){
                                 ToDecimal td=new ToDecimal(sb.toString());
                                 romVal=td.retun();
-                                System.out.println(stmnt+" is "+romVal);
+                                if(romVal>0){
+                                    System.out.println(outputStmnt+"is "+romVal);
+                                }else{
+                                    System.out.println("I have no idea what you are talking about");
+                                }
                             }
                         }
                     }
                 }else{
-
                     ToDecimal td=new ToDecimal(sb.toString());
                     romVal=td.retun();
                     if(map1.containsKey(ss)){
@@ -76,9 +107,12 @@ public class Parser {
                                 valueOfVar=entry.getValue();
                             }
                         }
+                    }else {
+                        System.out.println("I have no idea what you are talking about");
+                        break;
                     }
                     int mulValue=romVal*valueOfVar;
-                    System.out.println(stmnt+" is "+mulValue);
+                    System.out.println(outputStmnt+"is "+mulValue+" Credits");
                     break;
                 }
             }
@@ -99,7 +133,7 @@ public class Parser {
             }
         }
     }
-    void statementCollect(){
+    void statementCollect() throws ArrayIndexOutOfBoundsException{
         int romVal;
         while(cont2){
             System.out.println("Enter a statement: ");
@@ -110,14 +144,12 @@ public class Parser {
             for(String ss: arr){
                 count+=1;
                 if(map.containsValue(ss)){
-                    //System.out.println(ss + "1");
                     for(Entry<String, String> entry:map.entrySet()){
                         if(ss.equals(entry.getValue())){
                             sb.append(entry.getKey());
                         }
                     }
                 }else{
-                    //
                     ToDecimal td=new ToDecimal(sb.toString());
                     romVal=td.retun();
                     int diValue=(Integer.parseInt(arr[count+1])/romVal);
@@ -129,7 +161,6 @@ public class Parser {
             System.out.println("Enter more statement? 1)Yes 2)No");
             if(new String(s.nextLine()).contains("2")){
                 cont2=false;
-                //System.out.println("Im");
                 statementToDeci();
             }
         }

@@ -82,6 +82,17 @@ public class ToDecimal {
             isOkay=false;
             System.out.println("ERR! contains DM / LC / LD / LM / VX / VL / VC / VD / VM");
         }
+        //s.matches("[^(I|V|X|L|C|D|M)]")
+        if(!(s.contains("I") || s.contains("V") || s.contains("X") || s.contains("L") || s.contains("C") || s.contains("D") || s.contains("M"))){
+            isOkay=false;
+            System.out.println("ERR! can't find I / V / X / L / C / D / M");
+        }
+        Pattern pattern=Pattern.compile("[a-z]+|[0-9]+");
+        Matcher matcher=pattern.matcher(s);
+        if(matcher.find()){
+            isOkay=false;
+            System.out.println("Err! contains lowercase or number");
+        }
         return isOkay;
     }
 }
