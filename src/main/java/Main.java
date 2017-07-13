@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         boolean aBoolean = false;
         Scanner s=new Scanner(System.in);
-        System.out.println("1)Roman To Decimal 2)Decimal To Roman 3)Add Statement");
+        System.out.println("1)Roman To Decimal 2)Decimal To Roman 3)Add Statement 4)File Input");
         String option=s.nextLine();
         if(option.contains("2")){
             do {
@@ -30,6 +30,10 @@ public class Main {
             System.out.println(td.retun());
         }else if(option.contains("3")){
             Parser p=new Parser();
+            p.parserCall();
+        }else if (option.contains("4")){
+               ParaInput paraInput=new ParaInput();
+               paraInput.run();
         }
     }
 }

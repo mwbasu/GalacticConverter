@@ -18,15 +18,17 @@ public class Parser {
         map.put("V", "0");
         map.put("I", "0");
     }
-    public Parser() {
+    public void parserCall() {
         //mapp();
         mappReCaller();
         statementCollectCaller();
-        statementToDeci();
+        statementToDeciCaller();
     }
     void statementCollectCaller(){
         try {
-            statementCollect();
+            System.out.println("Enter a statement: ");
+            String stmnt=s.nextLine();
+            statementCollect(stmnt);
         }catch (Exception e){
             System.out.println("Error in input statement! Try again.");
             statementCollectCaller();
@@ -34,22 +36,22 @@ public class Parser {
     }
     void mappReCaller(){
         try {
-            mappRe();
+            System.out.println("Enter a relation:");
+            String s2=s.nextLine();
+            mappRe(s2);
         }catch (Exception e){
             System.out.println("Error in input statement! Try again.");
             mappReCaller();
         }
     }
-    void mappRe() throws ArrayIndexOutOfBoundsException{
+    void mappRe(String sip) throws ArrayIndexOutOfBoundsException{
         while(cont4){
-            System.out.println("Enter a relation:");
-            String s2=s.nextLine();
-            String[] arr = s2.split(" ");
+            String[] arr = sip.split(" ");
             if(map.containsKey(arr[2]) && arr[2].length()==1 && arr.length==3){
                 map.put(arr[2],arr[0]);
             }else{
                 System.out.println("Input error! Try again.");
-                mappRe();
+                mappReCaller();
             }
             System.out.println("Add more? 1)Yes  2)No");
             if(new String(s.nextLine()).contains("2")){
@@ -57,12 +59,14 @@ public class Parser {
             }
         }
     }
-
-    private void statementToDeci(){
+    void statementToDeciCaller(){
+        System.out.println("Enter a statement to translate: ");
+        String stmnt=s.nextLine();
+        statementToDeci(stmnt);
+    }
+    void statementToDeci(String stmnt){
         int romVal;
         while(cont3){
-            System.out.println("Enter a statement to translate: ");
-            String stmnt=s.nextLine();
             StringBuilder sb=new StringBuilder();
             StringBuilder outputStmnt=new StringBuilder();
             String[] arrTemp = stmnt.split(" ");
@@ -136,11 +140,9 @@ public class Parser {
             }
         }
     }
-    void statementCollect() throws ArrayIndexOutOfBoundsException{
+    void statementCollect(String stmnt) throws ArrayIndexOutOfBoundsException{
         int romVal;
         while(cont2){
-            System.out.println("Enter a statement: ");
-            String stmnt=s.nextLine();
             StringBuilder sb=new StringBuilder();
             String[] arr = stmnt.split(" ");
             int count=0;
@@ -164,7 +166,7 @@ public class Parser {
             System.out.println("Enter more statement? 1)Yes 2)No");
             if(new String(s.nextLine()).contains("2")){
                 cont2=false;
-                statementToDeci();
+                statementToDeciCaller();
             }
         }
     }
