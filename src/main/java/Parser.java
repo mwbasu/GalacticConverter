@@ -96,7 +96,7 @@ public class Parser {
                                 if(romVal>0){
                                     System.out.println(outputStmnt+"is "+romVal);
                                 }else{
-                                    System.out.println("I have no idea what you are talking about");
+                                    System.out.println("I have no idea what you are talking about!");
                                 }
                             }
                         }
