@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
  */
 public class ToDecimal {
     String input;
-    int decimal;
+    double decimal;
     public ToDecimal(String iString) {
         input=iString;
         Boolean isokay=formatChecker(input);
@@ -14,10 +14,10 @@ public class ToDecimal {
             decimal=decimalConverter(iString);
         }
     }
-    public int retun(){
+    public double retun(){
         return decimal;
     }
-    public static int decimalConverter(String input){
+    public static double decimalConverter(String input){
         int res=0;
         int values[]=new int[input.length()];
         for(int i=0; i<input.length(); i++){

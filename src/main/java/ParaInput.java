@@ -10,8 +10,8 @@ import java.util.Scanner;
 public class ParaInput {
 
     private final static LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
-    private final LinkedHashMap<String, Integer> map1 = new LinkedHashMap<String, Integer>();
-    Boolean cont1 = true, cont2 = true, cont3 = true, cont4 = true;
+    private final LinkedHashMap<String, Double> map1 = new LinkedHashMap<String, Double>();
+
 
     static {
         map.put("M", "0");
@@ -36,9 +36,11 @@ public class ParaInput {
                 } else {
                     if (s.contains("Credits") && !s.contains("how")) {
                         statementCollect(s);
-                    }
-                    if (s.contains("?") && s.contains("how")) {
+                    } else if (s.contains("?") && s.contains("how")) {
                         statementToDeci(s);
+                    }else {
+                        System.out.println("\n"+s);
+                        System.out.println("I have no idea what you are talking about!");
                     }
                 }
             }
@@ -57,7 +59,7 @@ public class ParaInput {
     }
 
     void statementCollect(String stmnt) throws ArrayIndexOutOfBoundsException {
-        int romVal;
+        double romVal;
         StringBuilder sb = new StringBuilder();
         String[] arr = stmnt.split(" ");
         int count = 0;
@@ -72,7 +74,7 @@ public class ParaInput {
             } else {
                 ToDecimal td = new ToDecimal(sb.toString());
                 romVal = td.retun();
-                int diValue = (Integer.parseInt(arr[count + 1]) / romVal);
+                double diValue = (Integer.parseInt(arr[count + 1]) / romVal);
                 map1.put(ss, diValue);
                 System.out.println("Value of " + ss + " is " + diValue);
                 break;
@@ -81,7 +83,7 @@ public class ParaInput {
     }
 
     void statementToDeci(String stmnt) {
-        int romVal;
+        double romVal;
         //optional
         System.out.println("\n" + stmnt);
         StringBuilder sb = new StringBuilder();
@@ -104,7 +106,7 @@ public class ParaInput {
         for (String s1 : arr) {
             outputStmnt.append(s1 + " ");
         }
-        int count = 0, valueOfVar = 0;
+        double count = 0, valueOfVar = 0;
         for (String ss : arr) {
             count += 1;
             if (map.containsValue(ss)) {
@@ -115,7 +117,7 @@ public class ParaInput {
                             ToDecimal td = new ToDecimal(sb.toString());
                             romVal = td.retun();
                             if (romVal > 0) {
-                                System.out.println(outputStmnt + "is " + romVal);
+                                System.out.println(outputStmnt + "is " + (int)romVal);
                             } else {
                                 System.out.println("I have no idea what you are talking about!");
                             }
@@ -126,7 +128,7 @@ public class ParaInput {
                 ToDecimal td = new ToDecimal(sb.toString());
                 romVal = td.retun();
                 if (map1.containsKey(ss)) {
-                    for (Map.Entry<String, Integer> entry : map1.entrySet()) {
+                    for (Map.Entry<String, Double> entry : map1.entrySet()) {
                         if (ss.equals(entry.getKey().toString())) {
                             valueOfVar = entry.getValue();
                         }
@@ -135,8 +137,13 @@ public class ParaInput {
                     System.out.println("I have no idea what you are talking about");
                     break;
                 }
-                int mulValue = romVal * valueOfVar;
-                System.out.println(outputStmnt + "is " + mulValue + " Credits");
+                double mulValue = romVal * valueOfVar;
+                if(mulValue%1==0.5){
+                    System.out.println(outputStmnt + "is " + mulValue + " Credits");
+                }else {
+                    System.out.println(outputStmnt + "is " + (int)mulValue + " Credits");
+                }
+
                 break;
             }
         }
