@@ -1,6 +1,8 @@
 # GalacticConverter
 bitwise Dart Team Assignment One
 
+##Build Status : ![build status](https://travis-ci.org/mwbasu/GalacticConverter.svg?branch=master)
+
 
 Assignment-1 MERCHANT'S GUIDE TO THE GALAXY 
 ________________________________________
