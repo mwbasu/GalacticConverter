@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="DecimalTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-07-17T06:18:59" hostname="GEDWDARTTC4" time="0.0">
+  <properties/>
+  <testcase name="decimalConverterTest1" classname="DecimalTest" time="0.0"/>
+  <testcase name="decimalConverterTest2" classname="DecimalTest" time="0.0"/>
+  <testcase name="formatCheckerTest1" classname="DecimalTest" time="0.0"/>
+  <testcase name="formatCheckerTest2" classname="DecimalTest" time="0.0"/>
+  <system-out><![CDATA[ERR! Contains IIII / XXXX / CCCC / MMMM
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
