@@ -17,7 +17,7 @@ public class ToDecimal {
     public double retun(){
         return decimal;
     }
-    public static double decimalConverter(String input){
+    public static int decimalConverter(String input){
         int res=0;
         int values[]=new int[input.length()];
         for(int i=0; i<input.length(); i++){

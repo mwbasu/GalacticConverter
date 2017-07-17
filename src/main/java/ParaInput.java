@@ -30,7 +30,6 @@ public class ParaInput {
             while (x.hasNextLine()) {
                 String s = x.nextLine();
                 String[] sArr = s.split(" ");
-                // System.out.println(sArr.length);
                 if (sArr.length == 3) {
                     mappRe(s);
                 } else {
@@ -76,7 +75,12 @@ public class ParaInput {
                 romVal = td.retun();
                 double diValue = (Integer.parseInt(arr[count + 1]) / romVal);
                 map1.put(ss, diValue);
-                System.out.println("Value of " + ss + " is " + diValue);
+                if(diValue-(int)diValue!=0){
+                    System.out.println("Value of " + ss + " is " + diValue);
+                }else {
+                    System.out.println("Value of " + ss + " is " + (int)diValue);
+                }
+
                 break;
             }
         }

@@ -65,68 +65,68 @@ public class Parser {
     void statementToDeci(String stmnt) {
         double romVal;
 
-            StringBuilder sb = new StringBuilder();
-            StringBuilder outputStmnt = new StringBuilder();
-            String[] arrTemp = stmnt.split(" ");
-            ArrayList<String> arr = new ArrayList<String>();
-            if (stmnt.contains("much")) {
-                for (int x = 3; x < (arrTemp.length - 1); x++) {
-                    arr.add(arrTemp[x]);
-                }
-            } else if (stmnt.contains("many")) {
-                for (int x = 4; x < (arrTemp.length - 1); x++) {
-                    arr.add(arrTemp[x]);
+        StringBuilder sb = new StringBuilder();
+        StringBuilder outputStmnt = new StringBuilder();
+        String[] arrTemp = stmnt.split(" ");
+        ArrayList<String> arr = new ArrayList<String>();
+        if (stmnt.contains("much")) {
+            for (int x = 3; x < (arrTemp.length - 1); x++) {
+                arr.add(arrTemp[x]);
+            }
+        } else if (stmnt.contains("many")) {
+            for (int x = 4; x < (arrTemp.length - 1); x++) {
+                arr.add(arrTemp[x]);
+            }
+        } else {
+            for (int x = 0; x < arrTemp.length; x++) {
+                arr.add(arrTemp[x]);
+            }
+        }
+        for (String s1 : arr) {
+            outputStmnt.append(s1 + " ");
+        }
+        double count = 0, valueOfVar = 0;
+        for (String ss : arr) {
+            count += 1;
+            if (map.containsValue(ss)) {
+                for (Entry<String, String> entry : map.entrySet()) {
+                    if (ss.equals(entry.getValue())) {
+                        sb.append(entry.getKey());
+                        if (count == arr.size()) {
+                            ToDecimal td = new ToDecimal(sb.toString());
+                            romVal = td.retun();
+                            if (romVal > 0) {
+                                System.out.println(outputStmnt + "is " + (int) romVal);
+                            } else {
+                                System.out.println("I have no idea what you are talking about!");
+                            }
+                        }
+                    }
                 }
             } else {
-                for (int x = 0; x < arrTemp.length; x++) {
-                    arr.add(arrTemp[x]);
-                }
-            }
-            for (String s1 : arr) {
-                outputStmnt.append(s1 + " ");
-            }
-            double count = 0, valueOfVar = 0;
-            for (String ss : arr) {
-                count += 1;
-                if (map.containsValue(ss)) {
-                    for (Entry<String, String> entry : map.entrySet()) {
-                        if (ss.equals(entry.getValue())) {
-                            sb.append(entry.getKey());
-                            if (count == arr.size()) {
-                                ToDecimal td = new ToDecimal(sb.toString());
-                                romVal = td.retun();
-                                if (romVal > 0) {
-                                    System.out.println(outputStmnt + "is " + (int) romVal);
-                                } else {
-                                    System.out.println("I have no idea what you are talking about!");
-                                }
-                            }
+                ToDecimal td = new ToDecimal(sb.toString());
+                romVal = td.retun();
+                if (map1.containsKey(ss)) {
+                    for (Entry<String, Double> entry : map1.entrySet()) {
+                        if (ss.equals(entry.getKey().toString())) {
+                            valueOfVar = entry.getValue();
                         }
                     }
                 } else {
-                    ToDecimal td = new ToDecimal(sb.toString());
-                    romVal = td.retun();
-                    if (map1.containsKey(ss)) {
-                        for (Entry<String, Double> entry : map1.entrySet()) {
-                            if (ss.equals(entry.getKey().toString())) {
-                                valueOfVar = entry.getValue();
-                            }
-                        }
-                    } else {
-                        System.out.println("I have no idea what you are talking about");
-                        break;
-                    }
-                    double mulValue = romVal * valueOfVar;
-                    System.out.println(outputStmnt + "is " + (int) mulValue + " Credits");
+                    System.out.println("I have no idea what you are talking about");
                     break;
                 }
+                double mulValue = romVal * valueOfVar;
+                System.out.println(outputStmnt + "is " + (int) mulValue + " Credits");
+                break;
             }
-            System.out.println("Enter more statement to translate? 1)Yes 2)No");
-            if (new String(s.nextLine()).contains("2")) {
-                cont3 = false;
-            }else {
-                statementToDeciCaller();
-            }
+        }
+        System.out.println("Enter more statement to translate? 1)Yes 2)No");
+        if (new String(s.nextLine()).contains("2")) {
+            cont3 = false;
+        } else {
+            statementToDeciCaller();
+        }
     }
 
     void mapp() {
@@ -170,11 +170,11 @@ public class Parser {
                 romVal = td.retun();
                 double diValue = (Integer.parseInt(arr[count + 1]) / romVal);
                 map1.put(ss, diValue);
-                if (diValue-(int)diValue==0.5){
+                if (diValue - (int) diValue == 0.5) {
                     System.out.println("Value of " + ss + " is " + diValue);
-                }else {
+                } else {
 
-                    System.out.println("Value of " + ss + " is " + (int)diValue);
+                    System.out.println("Value of " + ss + " is " + (int) diValue);
                 }
                 break;
             }
